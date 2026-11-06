@@ -1,118 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI USTOZ — Sening aqlli ustozing</title>
-<style>
-:root{--bg:#0b1020;--panel:#131c33;--panel2:#192642;--text:#f4f7ff;--muted:#aab6d1;--blue:#66a6ff;--cyan:#54e0d0;--line:#2a3858}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#1b3260 0,transparent 34%),radial-gradient(circle at 90% 10%,#26305b 0,transparent 30%),var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh}
-header{max-width:1100px;margin:auto;padding:22px 24px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;gap:12px;align-items:center;font-weight:900;font-size:22px;letter-spacing:.5px}.logo{width:43px;height:43px;border-radius:14px;background:linear-gradient(135deg,#65a7ff,#7a6cff);display:grid;place-items:center;font-size:23px;box-shadow:0 8px 30px #467fff55}
-.pill{border:1px solid #3c5279;color:#c8d9ff;padding:8px 13px;border-radius:30px;font-size:12px}.account{display:flex;gap:8px;align-items:center}.account button{background:#203657;border:1px solid #3c5279;color:#eaf2ff;padding:9px 12px;border-radius:12px;cursor:pointer}.plans{margin-top:18px;background:#111a2dcc;border:1px solid var(--line);border-radius:22px;padding:22px}.plans h2{text-align:center;margin:0 0 8px}.plans>p{text-align:center;color:var(--muted);font-size:13px}.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}.plan{background:#172540;border:1px solid #34496d;border-radius:17px;padding:18px}.plan.featured{border-color:#59a3ff;box-shadow:0 0 25px #4c8fff20}.price{font-size:28px;font-weight:850;color:#8fc0ff;margin:10px 0}.plan ul{padding-left:19px;color:#c4d0e6;font-size:13px;line-height:1.9}.plan button{width:100%;margin-top:8px}.modal{position:fixed;inset:0;background:#050914d9;display:none;place-items:center;padding:20px;z-index:5}.modal-box{max-width:420px;width:100%;background:#15213a;border:1px solid #40577e;border-radius:20px;padding:22px}.modal-box h2{margin-top:0}.modal-box p{color:#aab6d1;font-size:13px;line-height:1.5}
-main{max-width:1000px;margin:20px auto;padding:0 20px 50px}
-.hero{text-align:center;padding:32px 10px 26px}.eyebrow{color:var(--cyan);font-weight:700;letter-spacing:2px;font-size:12px}.hero h1{font-size:clamp(34px,6vw,58px);margin:12px 0;background:linear-gradient(90deg,#fff,#9fc7ff,#7af0df);-webkit-background-clip:text;color:transparent}.hero p{color:var(--muted);font-size:16px;max-width:620px;margin:0 auto;line-height:1.6}
-.layout{display:grid;grid-template-columns:250px 1fr;gap:18px;margin-top:20px}.side,.workspace,.info{background:#111a2dcc;border:1px solid var(--line);border-radius:22px;box-shadow:0 18px 55px #0003}.side{padding:18px;height:max-content}.side h3{font-size:13px;color:var(--muted);margin:4px 0 14px}.subject{display:flex;width:100%;align-items:center;gap:12px;padding:13px;border:1px solid transparent;background:transparent;color:var(--text);border-radius:13px;text-align:left;cursor:pointer;font-size:14px;margin:4px 0}.subject:hover,.subject.active{background:#23365a;border-color:#46699d}.emoji{font-size:20px;width:25px}.side-note{font-size:12px;color:var(--muted);line-height:1.55;margin-top:18px;padding:12px;background:#0d1527;border-radius:12px}
-.workspace{padding:22px}.topline{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}.topline h2{font-size:20px;margin:0}.status{font-size:11px;color:#7ce6c7;background:#153c3a;padding:7px 10px;border-radius:20px}
-label{display:block;color:#c6d2e9;font-size:13px;font-weight:650;margin:14px 0 8px}
-textarea,input,select{width:100%;border:1px solid #344568;background:#0c1426;color:white;border-radius:13px;padding:14px;font:inherit;outline:none}textarea{min-height:115px;resize:vertical}textarea:focus,input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #66a6ff20}
-.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1}
-button.primary,button.secondary{border:0;border-radius:13px;padding:13px 18px;font-weight:750;cursor:pointer;font-size:14px}.primary{background:linear-gradient(100deg,#579bff,#716cff);color:white;box-shadow:0 8px 24px #527eff35}.primary:hover{filter:brightness(1.1)}.secondary{background:#233451;color:#dbe8ff;border:1px solid #405477!important}
-.actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}.actions button{flex:1}
-.result{margin-top:22px;border:1px solid #304568;background:#0c1529;border-radius:16px;padding:18px;display:none;line-height:1.7}.result h3{margin:0 0 12px;color:#8fc0ff;font-size:17px}.step{padding:11px 13px;background:#172540;border-radius:11px;margin:9px 0}.formula{color:#8ff0df;font-weight:700}.answer{font-size:18px;color:#9af0c8;font-weight:800}.hint{font-size:12px;color:var(--muted);line-height:1.6;margin-top:14px}
-.info{margin-top:18px;padding:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature{padding:8px}.feature b{display:block;margin:8px 0}.feature p{color:var(--muted);font-size:12px;line-height:1.5;margin:0}.feature span{font-size:22px}
-footer{text-align:center;color:#8492af;font-size:12px;padding:25px}
-@media(max-width:720px){.layout{grid-template-columns:1fr}.side{display:grid;grid-template-columns:repeat(2,1fr)}.side h3,.side-note{grid-column:1/-1}.info{grid-template-columns:1fr}.workspace{padding:16px}header{padding:16px}.pill{display:none}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#1746a2">
+  <meta name="description" content="English to Uzbek Translator — tarjima, talaffuz va lug‘at.">
+  <title>English to Uzbek Translator</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header><div class="brand"><div class="logo">🎓</div> AI USTOZ</div><div class="account"><div class="pill">BILIM OLISHNING YANGI USULI</div><button id="profileBtn">👤 Ism kiritish</button></div></header>
-<main>
-<section class="hero"><div class="eyebrow">SENING SHAXSIY YORDAMCHING</div><h1>O‘rgan. Tushun. Yuksal.</h1><p>Misolingni yoki savolingni yoz. AI USTOZ uni tushuntirishga, kerakli qoidalarni eslatishga va yangi mashq bilan bilimingni sinashga yordam beradi.</p></section>
-<div class="layout">
-<aside class="side"><h3>FANNI TANLANG</h3>
-<button class="subject active" data-sub="math"><span class="emoji">➗</span> Matematika</button>
-<button class="subject" data-sub="english"><span class="emoji">🇬🇧</span> Ingliz tili</button>
-<button class="subject" data-sub="physics"><span class="emoji">⚡</span> Fizika</button>
-<button class="subject" data-sub="chemistry"><span class="emoji">🧪</span> Kimyo</button>
-<button class="subject" data-sub="biology"><span class="emoji">🧬</span> Biologiya</button>
-<button class="subject" data-sub="history"><span class="emoji">🏛️</span> Tarix</button>
-<button class="subject" data-sub="geography"><span class="emoji">🌍</span> Geografiya</button>
-<button class="subject" data-sub="informatics"><span class="emoji">💻</span> Informatika</button>
-<div class="side-note">💡 <b>Maslahat:</b> Savolingni aniq yoz. Masalan: “3x + 7 = 22 tenglamani ishlanishi bilan tushuntir”.</div></aside>
-<section class="workspace">
-<div class="topline"><h2 id="subjectTitle">➗ Matematika darsi</h2><span class="status">● DEMO TA'LIM REJIMI</span></div>
-<label for="question">SAVOLINGIZNI YOZING</label>
-<textarea id="question" placeholder="Masalan: 3x + 7 = 22 tenglamani yechib tushuntir..."></textarea>
-<div class="actions"><button class="primary" id="solve">✨ Tushuntirib ber</button><button class="secondary" id="clear">Tozalash</button></div>
-<div class="result" id="result" aria-live="polite"></div>
-<div class="hint">Bu hozircha sinab ko‘rish uchun tayyorlangan demo. U matematik tenglamalar va ayrim inglizcha so‘zlarni tushuntiradi. Barcha fanlar bo‘yicha erkin savollarga haqiqiy AI javob berishi uchun keyingi bosqichda xavfsiz server va AI API ulash kerak bo‘ladi.</div>
-</section>
-</div>
-<section class="info">
-<div class="feature"><span>🧠</span><b>Oddiy tushuntirish</b><p>Javobni yodlash emas, qanday topilganini tushunishga yordam.</p></div>
-<div class="feature"><span>📚</span><b>Qoida va formulalar</b><p>Mavzuga tegishli asosiy formula yoki qoidani eslatadi.</p></div>
-<div class="feature"><span>🎯</span><b>Yangi mashq</b><p>Har safar mashqlar ro‘yxatidan boshqa savol tanlaydi.</p></div>
-</section>
-</main>
-<footer>© 2026 AI USTOZ · Har kuni yangi bilim sari!</footer>
-<script>
-const names={math:"➗ Matematika",english:"🇬🇧 Ingliz tili",physics:"⚡ Fizika",chemistry:"🧪 Kimyo",biology:"🧬 Biologiya",history:"🏛️ Tarix",geography:"🌍 Geografiya",informatics:"💻 Informatika"};
-let subject="math",used={};
-document.querySelectorAll(".subject").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".subject").forEach(x=>x.classList.remove("active"));b.classList.add("active");subject=b.dataset.sub;document.getElementById("subjectTitle").textContent=names[subject]+" darsi";document.getElementById("result").style.display="none";}));
-const $=id=>document.getElementById(id);
-function newQuestion(){
- const pool={
- math:["5x + 4 = 29 tenglamani yech.","3x - 8 = 16 tenglamani yech.","7x + 2 = 37 tenglamani yech.","4x - 6 = 18 tenglamani yech.","6x + 5 = 41 tenglamani yech.","2x + 13 = 31 tenglamani yech.","9x - 7 = 38 tenglamani yech."],
- english:["Translate: I usually read books in the evening.","Choose the correct form: She ___ to school every day. (go/goes)","Translate: They are playing football now.","Make a sentence using the word 'because'.","Change to past simple: I visit my grandmother."],
- physics:["Jism 3 sekundda 18 metr yursa, tezligini top. (v=s/t)","Kuch 5 N, massa 2 kg. Tezlanishni top. (a=F/m)","10 N kuch jismni 4 metr siljitdi. Ishni top. (A=F·s)"],
- chemistry:["Suvning kimyoviy formulasini yoz va elementlarini ayt.","CO₂ molekulasida nechta kislorod atomi bor?","Osh tuzining formulasini yoz."],
- biology:["O‘simliklarda fotosintez qaysi organoidda sodir bo‘ladi?","Inson tanasida qonni qaysi organ haydaydi?","Hujayraning boshqaruv markazi nima?"],
- history:["Amir Temur qaysi yilda tug‘ilgan?","Buyuk Ipak yo‘li nima uchun muhim bo‘lgan?","O‘zbekiston mustaqilligi qachon e’lon qilingan?"],
- geography:["Yer yuzidagi eng katta okean qaysi?","Ekvator Yer sharini qanday qismlarga ajratadi?","O‘zbekiston qaysi materikda joylashgan?"],
- informatics:["Algoritm nima? O‘z so‘zing bilan tushuntir.","Kompyuterning asosiy qurilmalaridan uchtasini ayt.","1 kilobayt taxminan necha bayt?"]
- };
- let arr=pool[subject]||pool.math, available=arr.filter(q=>!(used[subject]||[]).includes(q));
- if(!available.length){used[subject]=[];available=arr;}
- let q=available[Math.floor(Math.random()*available.length)];(used[subject]??=[]).push(q);return q;
-}
-function show(html){$("result").innerHTML=html;$("result").style.display="block";}
-function solveMath(q){
- let m=q.match(/(-?\d+(?:\.\d+)?)\s*x\s*([+-])\s*(\d+(?:\.\d+)?)\s*=\s*(-?\d+(?:\.\d+)?)/i);
- if(m){let a=+m[1],b=(m[2]==="+"?1:-1)*(+m[3]),c=+m[4],x=(c-b)/a;return `<h3>🧑‍🏫 Keling, bosqichma-bosqich yechamiz!</h3><p><b>Mavzu:</b> Bir noma’lumli chiziqli tenglama.</p><div class="step">1-qadam. Tenglama: <span class="formula">${a}x ${b>=0?"+":"−"} ${Math.abs(b)} = ${c}</span></div><div class="step">2-qadam. Sonni o‘ng tomonga o‘tkazamiz:<br><span class="formula">${a}x = ${c} ${b>=0?"−":"+"} ${Math.abs(b)} = ${c-b}</span></div><div class="step">3-qadam. Ikkala tomonni ${a} ga bo‘lamiz:<br><span class="formula">x = ${c-b} ÷ ${a} = ${Number(x.toFixed(4))}</span></div><p class="answer">✅ Javob: x = ${Number(x.toFixed(4))}</p><p><b>Qoida:</b> ax + b = c bo‘lsa, x = (c − b) / a.</p><hr><b>🎯 Endi sen yechib ko‘r:</b><div class="step">${newQuestion()}</div><p class="hint">Yechimingni yuqoridagi maydonga yozib yuborishing mumkin.</p>`;}
- let ar=q.match(/(-?\d+(?:\.\d+)?)\s*([+\-*/:])\s*(-?\d+(?:\.\d+)?)/);
- if(ar){let a=+ar[1],op=ar[2],b=+ar[3],v=op==="+"?a+b:op==="-"?a-b:op==="*"?a*b:a/b;return `<h3>🧑‍🏫 Misolning ishlanishi</h3><div class="step">${a} ${op} ${b} = ${Number(v.toFixed(5))}</div><p class="answer">✅ Javob: ${Number(v.toFixed(5))}</p><p><b>Qoida:</b> Amalni bajarishda sonlar ustida tanlangan arifmetik amal qo‘llanadi.</p><b>🎯 Mashq:</b><div class="step">${newQuestion()}</div>`;}
- return `<h3>📘 Matematik savolingiz</h3><p>Hozirgi demo tenglamalar (masalan, <b>3x + 7 = 22</b>) va oddiy arifmetik misollarni (<b>18 : 3</b>) bosqichma-bosqich yecha oladi.</p><p>Murakkabroq savollar uchun keyingi bosqichda AI xizmatini ulaymiz.</p><b>🎯 Mashq:</b><div class="step">${newQuestion()}</div>`;
-}
-function answer(){
- let q=$("question").value.trim();if(!q){show("<h3>✍️ Savolingizni yozing</h3><p>Misol yoki savolni kiriting, keyin “Tushuntirib ber” tugmasini bosing.</p>");return;}
- if(subject==="math"){show(solveMath(q));return;}
- if(subject==="english"){
-  let dict={"hello":"salom","book":"kitob","school":"maktab","apple":"olma","water":"suv","teacher":"o‘qituvchi","beautiful":"chiroyli","because":"chunki","usually":"odatda","friend":"do‘st","good morning":"xayrli tong"};
-  let clean=q.toLowerCase().replace(/[?.!]/g,"").trim(),meaning=dict[clean];
-  if(meaning){show(`<h3>🇬🇧 Ingliz tili</h3><div class="step"><b>${q}</b> — ${meaning}</div><p><b>Maslahat:</b> Yangi so‘zni gap ichida ishlatib ko‘ring.</p><b>🎯 Mashq:</b><div class="step">${newQuestion()}</div>`);}
-  else show(`<h3>🇬🇧 Ingliz tili darsi</h3><p>Ingliz tilida gap tuzishda so‘z tartibiga e’tibor bering. Masalan, Present Simple’da he/she/it bilan fe’lga odatda -s qo‘shiladi.</p><div class="step"><b>Misol:</b> She plays tennis. — U tennis o‘ynaydi.</div><p><b>Qoida:</b> Subject + verb(s/es) + object.</p><b>🎯 Mashq:</b><div class="step">${newQuestion()}</div><p class="hint">Bu demo hozircha asosiy qoida va mashqlarni ko‘rsatadi.</p>`);
-  return;
- }
- const basics={
- physics:["Fizikada masalani yechish uchun berilgan kattaliklarni yozing, kerakli formulani tanlang va birliklarni tekshiring.","Tezlik formulasi: v = s / t. Kuch formulasi: F = m · a. Ish formulasi: A = F · s."],
- chemistry:["Kimyoviy formuladagi belgilar elementlarni, pastki indekslar esa atomlar sonini bildiradi.","Masalan, H₂O — 2 ta vodorod va 1 ta kislorod atomidan tashkil topgan suv molekulasi."],
- biology:["Biologiya tirik organizmlar va ularning hayot jarayonlarini o‘rganadi.","Masalan, fotosintez o‘simlik hujayrasidagi xloroplastlarda sodir bo‘ladi."],
- history:["Tarixiy savolga javob berishda sana, joy, asosiy shaxslar va voqea sabablarini ajratib oling.","Javobni sabab → voqea → natija tartibida tushuntirish qulay."],
- geography:["Geografik savolni tushunishda xarita, joylashuv, tabiiy sharoit va atamalarni birga ko‘rib chiqing.","Masalan, Tinch okeani Yer yuzidagi eng katta okeandir."],
- informatics:["Informatikada muammoni kichik bosqichlarga ajratib, algoritm tuzish muhim.","Algoritm — vazifani bajarish uchun aniq va tartibli ko‘rsatmalar ketma-ketligi."]
- };
- let z=basics[subject];show(`<h3>${names[subject]} — tushuntirish</h3><p>${z[0]}</p><div class="step">${z[1]}</div><p class="hint">Savolingizga mos to‘liq, individual javoblar uchun saytga keyingi bosqichda AI API ulash zarur.</p><b>🎯 Mavzuga oid mashq:</b><div class="step">${newQuestion()}</div>`);
-}
-$("solve").addEventListener("click",answer);$("clear").addEventListener("click",()=>{$("question").value="";$("result").style.display="none";$("question").focus();});
-$("question").addEventListener("keydown",e=>{if(e.key==="Enter"&&(e.ctrlKey||e.metaKey))answer();});
-const modal=$("nameModal"), profile=$("profileBtn"), storedName=localStorage.getItem("aiustoz_student_name");
-function greet(){const n=localStorage.getItem("aiustoz_student_name");profile.textContent=n?"👤 "+n:"👤 Ism kiritish";if(n){document.querySelector(".hero p").textContent="Salom, "+n+"! Misolingni yoki savolingni yoz. AI USTOZ uni tushuntirishga va yangi mashq bilan bilimingni sinashga yordam beradi.";}}
-profile.addEventListener("click",()=>{modal.style.display="grid";$("studentName").value=localStorage.getItem("aiustoz_student_name")||"";});
-$("saveName").addEventListener("click",()=>{const n=$("studentName").value.trim();if(!n){$("studentName").focus();return;}localStorage.setItem("aiustoz_student_name",n);modal.style.display="none";greet();});
-$("closeModal").addEventListener("click",()=>modal.style.display="none");
-if(!storedName){modal.style.display="grid";}else greet();
-document.querySelectorAll(".choosePlan").forEach(b=>b.addEventListener("click",()=>alert("Premium tarifi tanlandi! Hozircha to‘lov tizimi ulanmagan. Sayt egasi xavfsiz to‘lov va obuna xizmatini sozlagach, obuna faollashadi.")));
-</script>
+  <header class="top">
+    <div class="brand"><span class="logo">E↔U</span><div><strong>ENGLISH TO UZBEK</strong><small>TRANSLATOR</small></div></div>
+    <span class="online">● Online tarjimon</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">YOUR ENGLISH HELPER</p>
+      <h1>Ingliz tilini <span>oson o‘rganing.</span></h1>
+      <p class="sub">So‘z va gaplarni tarjima qiling, talaffuzini tinglang va yangi so‘zlarni saqlang.</p>
+    </section>
+
+    <section class="translator card">
+      <div class="lang-row"><span>🇬🇧 English</span><span class="arrow">→</span><span>🇺🇿 O‘zbekcha</span></div>
+      <label for="source">Inglizcha matn</label>
+      <textarea id="source" placeholder="Masalan: I want to learn English..." rows="4"></textarea>
+      <div class="actions">
+        <button class="primary" id="translateBtn">Tarjima qilish</button>
+        <button class="secondary" id="clearBtn">Tozalash</button>
+      </div>
+      <p id="status" class="status" aria-live="polite">Tarjima qilish uchun matn kiriting.</p>
+      <div class="result-head"><label for="result">O‘zbekcha tarjima</label><div><button class="icon-btn" id="speakUz" title="Tarjimani tinglash">🔊</button><button class="icon-btn" id="copyBtn" title="Nusxalash">📋</button></div></div>
+      <div id="result" class="result" aria-live="polite">Tarjima shu yerda chiqadi.</div>
+      <button class="save-btn" id="saveBtn">☆ Sevimli so‘zlarga saqlash</button>
+    </section>
+
+    <section class="card tools">
+      <h2>Ovozli talaffuz</h2>
+      <p>Inglizcha matnni ovoz chiqarib eshiting.</p>
+      <button class="secondary" id="speakEn">🔊 Inglizcha talaffuz</button>
+    </section>
+
+    <section class="card words">
+      <div class="section-title"><div><h2>Kunlik so‘zlar</h2><p>O‘rganishni bugun boshlang.</p></div><span class="pill">IELTS • CEFR</span></div>
+      <div id="dailyWords" class="word-list"></div>
+    </section>
+
+    <section class="card favorites">
+      <h2>☆ Sevimli so‘zlar</h2>
+      <p id="favoritesEmpty">Hozircha saqlangan so‘z yo‘q.</p>
+      <ul id="favoritesList"></ul>
+    </section>
+    <p class="notice">Eslatma: tarjima internet orqali ishlaydi. Ovoz chiqarish qurilmangizning nutq funksiyasidan foydalanadi.</p>
+  </main>
+  <footer>© 2026 English to Uzbek Translator</footer>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+    }
+  </script>
 </body>
 </html>
